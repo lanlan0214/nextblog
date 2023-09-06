@@ -9,3 +9,8 @@
   gap: 10px;
 }
 /* 2430 */
+
+.links {
+  display: flex;
+  gap: 20px; 
+}
