@@ -10,7 +10,7 @@ export const GET = async (req) => {
   const page = searchParams.get("page");  // 從 searchParams 中獲取名為 "page" 的參數值
   const cat = searchParams.get("cat");  // 從 searchParams 中獲取名為 "cat" 的參數值
 
-  const POST_PER_PAGE = 2;  // 每頁顯示的文章數量
+  const POST_PER_PAGE = 3;  // 每頁顯示的文章數量
 
   const query = {
     take: POST_PER_PAGE,  // 取得的文章數量

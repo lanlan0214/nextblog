@@ -25,7 +25,7 @@ const CardList = async ({ page, cat }) => {
   const { posts, count } = await getData(page, cat);
 
   // 每頁顯示的博客文章數量
-  const POST_PER_PAGE = 2;
+  const POST_PER_PAGE = 3;
 
   // 檢查是否有前一頁和下一頁的按鈕
   const hasPrev = POST_PER_PAGE * (page - 1) > 0;
