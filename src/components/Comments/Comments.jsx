@@ -24,10 +24,18 @@ const Comments = ({ postSlug }) => {
 
   const { status } = useSession()
 
-  const { data, isLoading } = useSWR(
+  const { data, mutate, isLoading } = useSWR(
     `http://localhost:3000/api/comments?postSlug=${postSlug}`,
     fetcher
   )
+
+  const handleSubmit = async () => {
+    await fetch("/api/comments", {
+      method: "POST",
+      body: JSON.stringify({ desc, postSlug })
+    })
+    mutate()
+  }
 
   const [desc, setDesc] = useState("")
 
@@ -37,14 +45,14 @@ const Comments = ({ postSlug }) => {
       {status === "authenticated" ? (
         <div className={styles.write}>
           <textarea placeholder='write a comment....' className={styles.input} onChange={e => setDesc(e.target.value)} />
-          <button className={styles.button}>Send</button>
+          <button className={styles.button} onClick={handleSubmit}>Send</button>
         </div>
       ) : (
         <Link href="/login">Login to write a comment</Link>
       )}
       <div className={styles.comments}>
-        {isLoading ? "loading" : data?.map(item => (
-          < div className={styles.comment} key={item._id}>
+        {isLoading ? "loading" : data?.map((item) => (
+          <div className={styles.comment} key={item._id}>
             <div className={styles.user}>
               {item?.user?.image && <Image src={item.user.image} alt='' width={50} height={50} className={styles.image} />}
               <div className={styles.userInfo}>
