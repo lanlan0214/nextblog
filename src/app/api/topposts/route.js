@@ -10,6 +10,7 @@ export const GET = async () => {
         views: 'desc',
       },
       take:5,
+      include: { user: true },
     });
     // 回傳包含類別列表的 JSON 格式
     return new NextResponse(JSON.stringify(hotposts, { status: 200 }));
