@@ -10,6 +10,7 @@ const Pagination = ({ page, hasPrev, hasNext }) => {
   // 使用 useRouter 來獲取路由器
   const router = useRouter();
 
+
   return (
     <div className={styles.container}>
       {/* 上一頁按鈕，如果沒有上一頁則禁用 */}

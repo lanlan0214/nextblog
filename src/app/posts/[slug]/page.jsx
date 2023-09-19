@@ -3,13 +3,14 @@ import styles from "./singlePage.module.css";
 import Image from "next/image";
 import Comments from "@/components/comments/Comments";
 
+// 從 API 獲取文章數據的函數，接受文章的 slug
 const getData = async (slug) => {
   const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
     cache: "no-store",
   });
 
   if (!res.ok) {
-    throw new Error("Failed");
+    throw new Error("獲取數據失敗");
   }
 
   return res.json();
@@ -18,6 +19,7 @@ const getData = async (slug) => {
 const SinglePage = async ({ params }) => {
   const { slug } = params;
 
+  // 獲取文章數據
   const data = await getData(slug);
 
   return (
@@ -50,6 +52,7 @@ const SinglePage = async ({ params }) => {
             dangerouslySetInnerHTML={{ __html: data?.desc }}
           />
           <div className={styles.comment}>
+            {/* 嵌入評論組件，並傳遞文章的 slug */}
             <Comments postSlug={slug}/>
           </div>
         </div>

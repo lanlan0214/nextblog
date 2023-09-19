@@ -10,7 +10,7 @@ export const GET = async (req) => {
   const page = searchParams.get("page");  // 從 searchParams 中獲取名為 "page" 的參數值
   const cat = searchParams.get("cat");  // 從 searchParams 中獲取名為 "cat" 的參數值
 
-  const POST_PER_PAGE = 3;  // 每頁顯示的文章數量
+  const POST_PER_PAGE = 999;  // 每頁顯示的文章數量
 
   const query = {
     take: POST_PER_PAGE,  // 取得的文章數量
@@ -24,7 +24,7 @@ export const GET = async (req) => {
     const [posts, count] = await prisma.$transaction([
 
       prisma.post.findMany(query),  // 使用 query 執行查詢
-      prisma.post.count({where:query.where}),  // 計算符合篩選條件的文章總數
+      prisma.post.count({ where: query.where }),  // 計算符合篩選條件的文章總數
     ])
 
     return new NextResponse(JSON.stringify({ posts, count }, { status: 200 }))  // 回傳包含文章列表和總數的 JSON
